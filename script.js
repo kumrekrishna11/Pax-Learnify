@@ -84,31 +84,6 @@ document.addEventListener("DOMContentLoaded", initApp);
 // Backup trigger in case DOMContentLoaded miss ho jaye
 window.onload = initApp; 
 
-function initApp() {
-    const savedUser = localStorage.getItem('activeUser');
-
-    if (savedUser) {
-        try {
-            // User ka data restore karo
-            currentUser = JSON.parse(savedUser);
-            
-            // Login screen ko turant chupa do
-            document.getElementById('authScreen').classList.add('hidden');
-            
-            loadDashboard();
-            
-            // 🔥 MAGIC FIX: User refresh se pehle jis page pe tha, use wahi kholo
-            const lastPage = localStorage.getItem('lastPage') || 'dashboard';
-            navigate(lastPage);
-            
-        } catch (e) {
-            console.error("Auto-login failed:", e);
-            navigate('auth'); // Error aaye toh hi login par bhejo
-        }
-    } else {
-        navigate('auth');
-    }
-}
 
 // ===============================
 // SAFE DASHBOARD LOADER
