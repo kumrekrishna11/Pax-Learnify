@@ -3,7 +3,19 @@
 // ===============================
 const SUPABASE_URL = 'https://pnmbukndwvsjxlidtyjy.supabase.co'; 
 const SUPABASE_ANON_KEY = 'sb_publishable_S2HcIii2kVuZ59G191GhRg_hwL-vlnL';
-const supabase = window.supabase.createClient('https://pnmbukndwvsjxlidtyjy.supabase.co', 'sb_publishable_S2HcIii2kVuZ59G191GhRg_hwL-vlnL');
+let supabase = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.supabase) {
+        supabase = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+        );
+        console.log("Supabase connected");
+    } else {
+        console.error("Supabase failed to load");
+    }
+});
 
 let currentUser = null;
 let currentOTP = null;
@@ -81,9 +93,6 @@ function logout() {
 
 // DOM load hote hi app initialize karega (Fast & Reliable)
 document.addEventListener("DOMContentLoaded", initApp);
-// Backup trigger in case DOMContentLoaded miss ho jaye
-window.onload = initApp; 
-
 
 // ===============================
 // SAFE DASHBOARD LOADER
