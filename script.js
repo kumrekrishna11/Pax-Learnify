@@ -18,24 +18,6 @@ const ADMIN_EMAILS = [
 ];
 const ADMIN_PASS = 'Pax-Learnify-Admin';
 
-
-// ===============================
-// INIT
-// ===============================
-window.onload = function() {
-
-    const savedUser = localStorage.getItem('activeUser');
-
-    if (savedUser) {
-        currentUser = JSON.parse(savedUser);
-        document.getElementById('authScreen').classList.add('hidden');
-        loadDashboard();
-        navigate('dashboard');
-    } else {
-        navigate('auth');
-    }
-};
-
 // ===============================
 // REAL SUPABASE LOGIN
 // ===============================
