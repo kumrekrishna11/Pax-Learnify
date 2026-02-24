@@ -59,25 +59,30 @@ window.renderEarnings = renderEarnings;
 window.updateAdminEarningsWidget = updateAdminEarningsWidget;
 
 // ===============================
-// INIT & AUTO-LOGIN
+// INIT & AUTO-LOGIN 
 // ===============================
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", () => {
     const savedUser = localStorage.getItem('activeUser');
-    if (savedUser) {
+    
+    // Check agar user data exist karta hai aur valid hai
+    if (savedUser && savedUser !== "undefined") {
         try {
             currentUser = JSON.parse(savedUser);
             document.getElementById('authScreen').classList.add('hidden');
             loadDashboard();
+            
+            // Last page redirect ya default dashboard
             const lastPage = localStorage.getItem('lastPage') || 'dashboard';
             navigate(lastPage);
         } catch (e) {
-            navigate('auth'); 
+            console.error("Session fetch failed:", e);
+            logout(); // Agar data corrupt ho toh safe logout
         }
     } else {
         document.getElementById('publicMenu').classList.remove('hidden');
         navigate('auth');
     }
-};
+});
 
 // ===============================
 // FIRESTORE LOGIN (FIXED)
