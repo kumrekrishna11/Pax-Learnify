@@ -791,7 +791,7 @@ async function deleteUserAccount() {
 
 // Utility Navigation
 function navigate(viewName) {
-    if (!currentUser && viewName !== 'auth') {
+    if (!currentUser && viewName !== 'auth' && viewName !== 'about') {
         document.querySelectorAll('.view-section').forEach(v => v.classList.add('hidden'));
         document.getElementById('authScreen').classList.remove('hidden');
         return;
