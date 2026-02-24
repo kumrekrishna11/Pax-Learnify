@@ -444,6 +444,7 @@ async function fetchAndRenderUsers() {
 
         querySnapshot.forEach(doc => {
             const u = doc.data();
+            const joinDate = u.timestamp ? new Date(u.timestamp).toLocaleDateString('en-IN') : 'N/A';
             tbody.innerHTML += `<tr><td>${u.name}</td><td>${u.username}</td><td>${u.role}</td></tr>`;
         });
         
